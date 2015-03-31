@@ -67,9 +67,16 @@ namespace Pokemon
         {
             stats_["hp"] = (int)((baseStats["hp"] * 2 + individualValues["hp"] + effortValues["hp"] / 4) * level / 100 + 10 + level);
 
+            var boostTable = new List<double>(){1, 1.5, 2, 2.5, 3, 3.5, 4};
             foreach (var statName in new List<string>() { "atk", "def", "spa", "spd", "spe" })
             {
                 stats_[statName] = (int)(((baseStats[statName] * 2 + individualValues[statName] + effortValues[statName] / 4) * level / 100 + 5) * nature.multiplier[statName]);
+                if(boosts[statName] >= 0) {
+                    stats_[statName] = (int)(stats_[statName] * boostTable[boosts[statName]]);
+                }
+                else {
+                    stats_[statName] = (int)(stats_[statName] / boostTable[boosts[statName]]);
+                }
             }
         }
 

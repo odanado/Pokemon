@@ -15,6 +15,7 @@ namespace Pokemon
             var pokemon = new Pokemon("Garchomp");
             pokemon.effortValues["atk"] = 252;
             pokemon.effortValues["spe"] = 252;
+            pokemon.boosts["atk"] = 2;
 
             foreach (var stat in pokemon.stats)
             {
