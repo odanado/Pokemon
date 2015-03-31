@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Codeplex.Data;
 
 namespace Pokemon
 {
@@ -21,15 +20,7 @@ namespace Pokemon
 
         public Pokedex(string name)
         {
-            System.Reflection.Assembly myAssembly =
-                System.Reflection.Assembly.GetExecutingAssembly();
-            System.IO.StreamReader sr =
-                new System.IO.StreamReader(
-                    myAssembly.GetManifestResourceStream("Pokemon.pokedex.json"),
-                    System.Text.Encoding.GetEncoding("UTF-8"));
-
-            var pokedex = DynamicJson.Parse(sr.ReadToEnd()).BattlePokedex;
-            sr.Close();
+            var pokedex = Util.loadJson("pokedex.json").BattlePokedex;
 
             this.key = Util.toKey(name);
 

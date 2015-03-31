@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
+using Codeplex.Data;
 
 namespace Pokemon
 {
@@ -19,6 +20,21 @@ namespace Pokemon
             str = Regex.Replace(str,"[^a-z0-9]+","");
 
             return str;
+        }
+        public static dynamic loadJson(string filename)
+        {
+            System.Reflection.Assembly myAssembly =
+                System.Reflection.Assembly.GetExecutingAssembly();
+            System.IO.StreamReader sr =
+                new System.IO.StreamReader(
+                    myAssembly.GetManifestResourceStream("Pokemon." + filename),
+                    System.Text.Encoding.GetEncoding("UTF-8"));
+
+            var json = DynamicJson.Parse(sr.ReadToEnd());
+
+            sr.Close();
+
+            return json;
         }
     }
 }
