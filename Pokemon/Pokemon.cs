@@ -19,14 +19,14 @@ namespace Pokemon
         public Nature nature { get; set; }
         public Item item { get; set; }
 
-        public uint level { get; set; }
+        public int level { get; set; }
 
         public double heightm { get; set; }
         public double weightkg { get; set; }
 
         public string key { get; set; }
 
-        public Dictionary<string, int> stats_ { get; set; }
+        private Dictionary<string, int> stats_ { get; set; }
 
         public Pokemon(string name)
         {
