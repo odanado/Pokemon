@@ -8,8 +8,8 @@ namespace Pokemon
 {
     class Abilities
     {
-        public string Hidden { get; set; }
-        public string First { get; set; }
-        public string Second { get; set; }
+        public string hidden { get; set; }
+        public string first { get; set; }
+        public string second { get; set; }
     }
 }
