@@ -9,7 +9,7 @@ namespace Pokemon
 {
     class Util
     {
-        public static string toId(string str)
+        public static string toKey(string str)
         {
             str = str.Replace("é","e");
             str = str.Replace("♂","M");
