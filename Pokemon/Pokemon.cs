@@ -8,9 +8,11 @@ namespace Pokemon
 {
     class Pokemon
     {
-        public BaseStats baseStats { get; set; }
-        public EffortValues effortValues { get; set; }
-        public IndividualValues individualValues { get; set; }
+        public Dictionary<string, int> baseStats { get; set; }
+        public Dictionary<string, int> effortValues { get; set; }
+        public Dictionary<string, int> individualValues { get; set; }
+        public Dictionary<string, int> boosts { get; set; }
+
         public Abilities abilities { get; set; }
         public List<string> types { get; set; }
 
@@ -24,7 +26,7 @@ namespace Pokemon
 
         public string key { get; set; }
 
-        public Stats stats_ { get; set; }
+        public Dictionary<string, int> stats_ { get; set; }
 
         public Pokemon(string name)
         {
@@ -33,8 +35,19 @@ namespace Pokemon
             key = pokedex.key;
 
             baseStats = pokedex.baseStats;
-            effortValues = new EffortValues();
-            individualValues = new IndividualValues();
+            effortValues = new Dictionary<string, int>()
+            {
+                {"hp",0},{"atk",0},{"def",0},{"spa",0},{"spd",0},{"spe",0}
+            };
+            individualValues = new Dictionary<string, int>()
+            {
+                {"hp",31},{"atk",31},{"def",31},{"spa",31},{"spd",31},{"spe",31}
+            };
+            boosts = new Dictionary<string, int>()
+            {
+                {"atk",0},{"def",0},{"spa",0},{"spd",0},{"spe",0},{"accuracy",0},{"evasion",0}
+            };
+
             abilities = pokedex.abilities;
             types = pokedex.types;
 
@@ -46,15 +59,25 @@ namespace Pokemon
             heightm = pokedex.heightm;
             weightkg = pokedex.weightkg;
 
-            stats_ = new Stats(baseStats, effortValues, individualValues, level, nature);
+            stats_ = new Dictionary<string, int>();
 
         }
 
-        public Stats stats
+        private void calcStats()
+        {
+            stats_["hp"] = (int)((baseStats["hp"] * 2 + individualValues["hp"] + effortValues["hp"] / 4) * level / 100 + 10 + level);
+
+            foreach (var statName in new List<string>() { "atk", "def", "spa", "spd", "spe" })
+            {
+                stats_[statName] = (int)(((baseStats[statName] * 2 + individualValues[statName] + effortValues[statName] / 4) * level / 100 + 5) * nature.multiplier[statName]);
+            }
+        }
+
+        public Dictionary<string,int> stats
         {
             get
             {
-                stats_ = new Stats(baseStats, effortValues, individualValues, level, nature);
+                calcStats();
                 return stats_;
             }
         }

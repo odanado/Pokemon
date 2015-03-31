@@ -10,8 +10,17 @@ namespace Pokemon
     {
         static void Main(string[] args)
         {
-            IndividualValues iv = new IndividualValues();
-            EffortValues ev = new EffortValues();
+
+            var nature = new Nature("jolly");
+            var pokemon = new Pokemon("Garchomp");
+            pokemon.effortValues["atk"] = 252;
+            pokemon.effortValues["spe"] = 252;
+
+            foreach (var stat in pokemon.stats)
+            {
+                Console.WriteLine(stat);
+            }
+
         }
     }
 }

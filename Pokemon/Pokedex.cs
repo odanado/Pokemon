@@ -8,7 +8,7 @@ namespace Pokemon
 {
     class Pokedex
     {
-        public BaseStats baseStats { get; set; }
+        public Dictionary<string, int> baseStats { get; set; }
         public Abilities abilities { get; set; }
         public List<string> types { get; set; }
         public double heightm { get; set; }
@@ -24,17 +24,15 @@ namespace Pokemon
 
             this.key = Util.toKey(name);
 
-            baseStats = new BaseStats();
+            baseStats = new Dictionary<string, int>();
             abilities = new Abilities();
             types = new List<string>();
 
+            foreach (KeyValuePair<string, dynamic> bs in pokedex[key].baseStats)
+            {
+                baseStats[bs.Key] = (int)bs.Value;
+            }
 
-            baseStats.hp  = (uint) pokedex[key].baseStats.hp;
-            baseStats.atk = (uint) pokedex[key].baseStats.atk;
-            baseStats.def = (uint) pokedex[key].baseStats.def;
-            baseStats.spa = (uint) pokedex[key].baseStats.spa;
-            baseStats.spd = (uint) pokedex[key].baseStats.spd;
-            baseStats.spe = (uint) pokedex[key].baseStats.spe;
 
             abilities.first = pokedex[key].abilities.first;
             if (pokedex[key].abilities.IsDefined("second")) abilities.second = pokedex[key].abilities.second;
