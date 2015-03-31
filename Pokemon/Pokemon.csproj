@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DynamicJson">
+      <HintPath>..\..\..\..\..\Desktop\DynamicJson_1.2.0.0\DynamicJson.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -41,12 +44,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IVs.cs" />
+    <Compile Include="Abilities.cs" />
+    <Compile Include="BaseStats.cs" />
+    <Compile Include="EffortValues.cs" />
+    <Compile Include="IndividualValues.cs" />
+    <Compile Include="Nature.cs" />
+    <Compile Include="Pokedex.cs" />
+    <Compile Include="Pokemon.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Stats.cs" />
+    <Compile Include="Util.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <EmbeddedResource Include="pokedex.json" />
+    <EmbeddedResource Include="nature.json" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
