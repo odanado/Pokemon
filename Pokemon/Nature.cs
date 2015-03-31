@@ -12,7 +12,7 @@ namespace Pokemon
 
         public Dictionary<string, double> multiplier { set; get; }
 
-        public Nature(string name)
+        public Nature(string name = "hardy")
         {
             key = Util.toKey(name);
 
