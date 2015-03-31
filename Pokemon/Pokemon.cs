@@ -15,6 +15,7 @@ namespace Pokemon
         public List<string> types { get; set; }
 
         public Nature nature { get; set; }
+        public Item item { get; set; }
 
         public uint level { get; set; }
 
@@ -38,6 +39,7 @@ namespace Pokemon
             types = pokedex.types;
 
             nature = new Nature();
+            item = new Item();
 
             level = 50;
 

@@ -48,6 +48,7 @@
     <Compile Include="BaseStats.cs" />
     <Compile Include="EffortValues.cs" />
     <Compile Include="IndividualValues.cs" />
+    <Compile Include="Item.cs" />
     <Compile Include="Nature.cs" />
     <Compile Include="Pokedex.cs" />
     <Compile Include="Pokemon.cs" />
@@ -60,6 +61,7 @@
     <None Include="App.config" />
     <EmbeddedResource Include="pokedex.json" />
     <EmbeddedResource Include="nature.json" />
+    <EmbeddedResource Include="items.json" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
