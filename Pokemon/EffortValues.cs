@@ -16,13 +16,8 @@ namespace Pokemon
         public uint spe { set; get; }
 
         public EffortValues()
+            : this(0, 0, 0, 0, 0, 0)
         {
-            this.hp = 0;
-            this.atk = 0;
-            this.def = 0;
-            this.spa = 0;
-            this.spd = 0;
-            this.spe = 0;
         }
 
         public EffortValues(uint hp, uint atk, uint def, uint spa, uint spd, uint spe)

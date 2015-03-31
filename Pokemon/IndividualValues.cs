@@ -16,13 +16,8 @@ namespace Pokemon
         public uint spe { set; get; }
 
         public IndividualValues()
+            : this(31, 31, 31, 31, 31, 31)
         {
-            this.hp = 31;
-            this.atk = 31;
-            this.def = 31;
-            this.spa = 31;
-            this.spd = 31;
-            this.spe = 31;
         }
 
         public IndividualValues(uint hp, uint atk, uint def, uint spa, uint spd, uint spe)
