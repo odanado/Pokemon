@@ -11,6 +11,7 @@ namespace Pokemon
         static void Main(string[] args)
         {
 
+
             var nature = new Nature("jolly");
             var pokemon = new Pokemon("Garchomp");
             pokemon.effortValues["atk"] = 252;
@@ -21,6 +22,10 @@ namespace Pokemon
             {
                 Console.WriteLine(stat);
             }
+
+            var move = new Move("Thunderbolt");
+
+            Console.WriteLine(move.basePower);
 
         }
     }

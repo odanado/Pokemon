@@ -45,8 +45,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abilities.cs" />
-    <Compile Include="DamageCalculator.cs" />
+    <Compile Include="CalcDamage.cs" />
     <Compile Include="Item.cs" />
+    <Compile Include="Move.cs" />
     <Compile Include="Nature.cs" />
     <Compile Include="Pokedex.cs" />
     <Compile Include="Pokemon.cs" />
@@ -59,6 +60,7 @@
     <EmbeddedResource Include="pokedex.json" />
     <EmbeddedResource Include="nature.json" />
     <EmbeddedResource Include="items.json" />
+    <EmbeddedResource Include="moves.json" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
