@@ -1,6 +1,6 @@
 # Pokemon
 
-Pokemon/pokedex.json と Pokemon/items.json と Pokemon/moves.json は以下のものを使用しています  
+Pokemon/pokedex.json と Pokemon/items.json と Pokemon/moves.json と Pokemon/typechart.json は以下のものを使用しています  
 Pokémon Showdown
 
 The MIT License
