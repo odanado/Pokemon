@@ -25,9 +25,6 @@ namespace Pokemon
              * 防御力 = ( ぼうぎょ * 防御力補正 )
              */
 
-            Console.WriteLine(String.Format("attackStat {0} defenseStat {1}", attackStat, defenseStat));
-            Console.WriteLine(String.Format("atk {0} def {1}", attacker.stats[attackStat], defender.stats[defenseStat]));
-
             int baseDamage;
             baseDamage = (((((attacker.level * 2) / 5 + 2) * move.basePower * attacker.stats[attackStat]) / defender.stats[defenseStat]) / 50 + 2);
 
