@@ -9,9 +9,9 @@ namespace Pokemon
     class Pokemon
     {
         public Dictionary<string, int> baseStats { get; set; }
-        public Dictionary<string, int> effortValues { get; set; }
-        public Dictionary<string, int> individualValues { get; set; }
-        public Dictionary<string, int> boosts { get; set; }
+        private ObservableDictionary<string, int> effortValues_;
+        private ObservableDictionary<string, int> individualValues_;
+        private ObservableDictionary<string, int> boosts_;
 
         public Abilities abilities { get; set; }
         public List<string> types { get; set; }
@@ -26,7 +26,9 @@ namespace Pokemon
 
         public string key { get; set; }
 
-        private Dictionary<string, int> stats_ { get; set; }
+        public Dictionary<string, int> stats { get; set; }
+
+        public bool isBurn { get; set; }
 
         public Pokemon(string name)
         {
@@ -35,15 +37,15 @@ namespace Pokemon
             key = pokedex.key;
 
             baseStats = pokedex.baseStats;
-            effortValues = new Dictionary<string, int>()
+            effortValues_ = new ObservableDictionary<string, int>(new ObservableDictionary<string,int>.Func(calcStats))
             {
                 {"hp",0},{"atk",0},{"def",0},{"spa",0},{"spd",0},{"spe",0}
             };
-            individualValues = new Dictionary<string, int>()
+            individualValues_ = new ObservableDictionary<string, int>(new ObservableDictionary<string, int>.Func(calcStats))
             {
                 {"hp",31},{"atk",31},{"def",31},{"spa",31},{"spd",31},{"spe",31}
             };
-            boosts = new Dictionary<string, int>()
+            boosts_ = new ObservableDictionary<string, int>(new ObservableDictionary<string, int>.Func(calcStats))
             {
                 {"atk",0},{"def",0},{"spa",0},{"spd",0},{"spe",0},{"accuracy",0},{"evasion",0}
             };
@@ -59,34 +61,46 @@ namespace Pokemon
             heightm = pokedex.heightm;
             weightkg = pokedex.weightkg;
 
-            stats_ = new Dictionary<string, int>();
+            stats = new Dictionary<string, int>();
 
+            isBurn = false;
+            calcStats();
         }
 
         private void calcStats()
         {
-            stats_["hp"] = (int)((baseStats["hp"] * 2 + individualValues["hp"] + effortValues["hp"] / 4) * level / 100 + 10 + level);
+            stats["hp"] = (int)((baseStats["hp"] * 2 + individualValues_["hp"] + effortValues_["hp"] / 4) * level / 100 + 10 + level);
 
             var boostTable = new List<double>(){1, 1.5, 2, 2.5, 3, 3.5, 4};
             foreach (var statName in new List<string>() { "atk", "def", "spa", "spd", "spe" })
             {
-                stats_[statName] = (int)(((baseStats[statName] * 2 + individualValues[statName] + effortValues[statName] / 4) * level / 100 + 5) * nature.multiplier[statName]);
-                if(boosts[statName] >= 0) {
-                    stats_[statName] = (int)(stats_[statName] * boostTable[boosts[statName]]);
+                stats[statName] = (int)(((baseStats[statName] * 2 + individualValues_[statName] + effortValues_[statName] / 4) * level / 100 + 5) * nature.multiplier[statName]);
+                if(boosts_[statName] >= 0) {
+                    stats[statName] = (int)(stats[statName] * boostTable[boosts_[statName]]);
                 }
                 else {
-                    stats_[statName] = (int)(stats_[statName] / boostTable[boosts[statName]]);
+                    stats[statName] = (int)(stats[statName] / boostTable[boosts_[statName]]);
                 }
             }
         }
 
-        public Dictionary<string,int> stats
+
+        public ObservableDictionary<string, int> effortValues
         {
-            get
-            {
-                calcStats();
-                return stats_;
-            }
+            set { effortValues_ = value; calcStats(); }
+            get { calcStats(); return effortValues_; }
+        }
+
+        public ObservableDictionary<string, int> individualValues
+        {
+            set { individualValues_ = value; calcStats(); }
+            get { calcStats(); return individualValues_; }
+        }
+
+        public ObservableDictionary<string, int> boosts
+        {
+            set { boosts_ = value; calcStats(); }
+            get { calcStats(); return boosts_; }
         }
 
     }

@@ -10,23 +10,17 @@ namespace Pokemon
     {
         static void Main(string[] args)
         {
+            var attacker = new Pokemon("Garchomp");
+            var defender = new Pokemon("Garchomp");
 
+            attacker.effortValues["atk"] = 252;
+            
+            var damageCalc = new DamageCalculator(); ;
 
-            var nature = new Nature("jolly");
-            var pokemon = new Pokemon("Garchomp");
-            pokemon.effortValues["atk"] = 252;
-            pokemon.effortValues["spe"] = 252;
-            pokemon.boosts["atk"] = 2;
+            var move = new Move("outrage");
+            var result = damageCalc.exec(attacker, defender, move);
 
-            foreach (var stat in pokemon.stats)
-            {
-                Console.WriteLine(stat);
-            }
-
-            var move = new Move("Thunderbolt");
-
-            Console.WriteLine(move.basePower);
-
+            result.ForEach(n => Console.WriteLine(n));
         }
     }
 }

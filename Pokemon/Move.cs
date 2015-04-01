@@ -12,9 +12,12 @@ namespace Pokemon
 
         public string type { get; private set; }
         public int accuracy { get; private set; }
-        public int basePower { get; private set; }
+        public int basePower { get; set; }
         public string category { get; private set; }
         public int pp { get; private set; }
+
+        public bool isSpreadHit { get; private set; }
+        public bool isCriticalHit { get; set; }
 
         public Move(string name = "none")
         {
@@ -30,6 +33,9 @@ namespace Pokemon
             basePower = (int)movedex[key].basePower;
             category = movedex[key].category;
             pp = (int)movedex[key].pp;
+
+            isSpreadHit = false;
+            isCriticalHit = false;
 
         }
 
