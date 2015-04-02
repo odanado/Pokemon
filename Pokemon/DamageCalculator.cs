@@ -14,13 +14,17 @@ namespace PokemonLibrary
         {
             typeChart = Util.loadJson("typechart.json").BattleTypeChart;
         }
-        public List<int> exec(Pokemon attacker, Pokemon defender, Move move)
+        public List<int> exec(Pokemon attacker, Pokemon defender, Move move, State state)
         {
             string attackStatName = move.category == "Physical" ? "atk" : "spa";
             string defenseStatName = move.category == "Physical" ? "def" : "spd";
             int attackStat = modifyStat(attacker, attackStatName);
             int defenseStat = modifyStat(defender, defenseStatName);
 
+            if (state.isSandStorm && move.category == "Special")
+            {
+                defenseStat = (int) (defenseStat * 1.5);
+            }
 
             /*
              * ダメージ = ( ( ( ( ( ( 攻撃側のレベル * 2 ) / 5 + 2 ) * 威力 * 攻撃力 ) / 防御力 ) / 50 + 2 ) * マルチ対象※ * 天候※ * 急所 * 乱数幅(16分率) * タイプ一致※ * タイプ相性 * 火傷 * ダメージ補正※ )
@@ -37,10 +41,30 @@ namespace PokemonLibrary
                 baseDamage = modify(baseDamage, 0.75);
             }
 
-            /* 
-             * TODO 天候補正
-             * 引数に場の状態を追加して天候補正を実装するのがいいのかな 
-             */
+            if (state.isSunnyDay)
+            {
+                if (move.type == "Fire")
+                {
+                    baseDamage = modify(baseDamage, 1.5);
+                }
+                if (move.type == "Water")
+                {
+                    baseDamage = modify(baseDamage, 0.5);
+                }
+            }
+
+            if (state.isRainDance)
+            {
+                if (move.type == "Water")
+                {
+                    baseDamage = modify(baseDamage, 1.5);
+                }
+                if (move.type == "Fire")
+                {
+                    baseDamage = modify(baseDamage, 0.5);
+                }
+
+            }
 
             if (move.isCriticalHit)
             {
