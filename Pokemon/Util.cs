@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 using Codeplex.Data;
 
-namespace Pokemon
+namespace PokemonLibrary
 {
     public class Util
     {
@@ -27,7 +27,7 @@ namespace Pokemon
                 System.Reflection.Assembly.GetExecutingAssembly();
             System.IO.StreamReader sr =
                 new System.IO.StreamReader(
-                    myAssembly.GetManifestResourceStream("Pokemon." + filename),
+                    myAssembly.GetManifestResourceStream("PokemonLibrary." + filename),
                     System.Text.Encoding.GetEncoding("UTF-8"));
 
             var json = DynamicJson.Parse(sr.ReadToEnd());

@@ -7,8 +7,8 @@
     <ProjectGuid>{5403E0F8-8B95-4F40-8F34-19D8F7C5D1C3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Pokemon</RootNamespace>
-    <AssemblyName>Pokemon</AssemblyName>
+    <RootNamespace>PokemonLibrary</RootNamespace>
+    <AssemblyName>PokemonLibrary</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
