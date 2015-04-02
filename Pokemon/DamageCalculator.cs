@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Pokemon
 {
-    class DamageCalculator
+    public class DamageCalculator
     {
 
         private dynamic typeChart;

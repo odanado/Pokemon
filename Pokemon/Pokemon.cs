@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Pokemon
 {
-    class Pokemon
+    public class Pokemon
     {
         public Dictionary<string, int> baseStats { get; set; }
         private ObservableDictionary<string, int> effortValues_;

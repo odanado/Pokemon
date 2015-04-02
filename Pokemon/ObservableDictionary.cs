@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Pokemon
 {
-    class ObservableDictionary<TKey, TValue> : Dictionary<TKey, TValue>
+    public class ObservableDictionary<TKey, TValue> : Dictionary<TKey, TValue>
     {
         public delegate void Func();
         private Func func;

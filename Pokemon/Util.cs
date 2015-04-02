@@ -8,7 +8,7 @@ using Codeplex.Data;
 
 namespace Pokemon
 {
-    class Util
+    public class Util
     {
         public static string toKey(string str)
         {

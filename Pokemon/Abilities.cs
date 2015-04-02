@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Pokemon
 {
-    class Abilities
+    public class Abilities
     {
         public string hidden { get; set; }
         public string first { get; set; }

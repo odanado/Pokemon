@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Pokemon
 {
-    class Item
+    public class Item
     {
         private string key;
         public Item(string name = "none")

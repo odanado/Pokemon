@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Pokemon
 {
-    class Pokedex
+    public class Pokedex
     {
         public Dictionary<string, int> baseStats { get; set; }
         public Abilities abilities { get; set; }
