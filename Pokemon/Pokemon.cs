@@ -16,7 +16,7 @@ namespace PokemonLibrary
         public Abilities abilities { get; set; }
         public List<string> types { get; set; }
 
-        public Nature nature { get; set; }
+        private Nature nature_;
         public Item item { get; set; }
 
         public int level { get; set; }
@@ -53,7 +53,7 @@ namespace PokemonLibrary
             abilities = pokedex.abilities;
             types = pokedex.types;
 
-            nature = new Nature();
+            nature_ = new Nature();
             item = new Item();
 
             level = 50;
@@ -74,7 +74,7 @@ namespace PokemonLibrary
             var boostTable = new List<double>(){1, 1.5, 2, 2.5, 3, 3.5, 4};
             foreach (var statName in new List<string>() { "atk", "def", "spa", "spd", "spe" })
             {
-                stats[statName] = (int)(((baseStats[statName] * 2 + individualValues_[statName] + effortValues_[statName] / 4) * level / 100 + 5) * nature.multiplier[statName]);
+                stats[statName] = (int)(((baseStats[statName] * 2 + individualValues_[statName] + effortValues_[statName] / 4) * level / 100 + 5) * nature_.multiplier[statName]);
                 if(boosts_[statName] >= 0) {
                     stats[statName] = (int)(stats[statName] * boostTable[boosts_[statName]]);
                 }
@@ -101,6 +101,12 @@ namespace PokemonLibrary
         {
             set { boosts_ = value; calcStats(); }
             get { calcStats(); return boosts_; }
+        }
+
+        public Nature nature
+        {
+            set { nature_ = value; calcStats(); }
+            get { return nature_; }
         }
 
     }
