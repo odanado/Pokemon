@@ -21,6 +21,12 @@ namespace PokemonLibrary
             int attackStat = modifyStat(attacker, attackStatName);
             int defenseStat = modifyStat(defender, defenseStatName);
 
+            if (move.isCriticalHit)
+            {
+                attackStat = attacker.stats[attackStatName];
+                defenseStat = defender.stats[defenseStatName];
+            }
+
             if (state.isSandStorm && move.category == "Special")
             {
                 defenseStat = (int)(defenseStat * 1.5);
@@ -148,13 +154,13 @@ namespace PokemonLibrary
         {
             int mod = 0x1000;
 
-            if (state.isReflect && move.category == "Physical")
+            if (!move.isCriticalHit && state.isReflect && move.category == "Physical")
             {
                 int tmp = state.isDauble ? 0xA8F : 0x800;
                 mod = joinMod(mod, tmp);
             }
 
-            if (state.isLightScreen && move.category == "Special")
+            if (!move.isCriticalHit && state.isLightScreen && move.category == "Special")
             {
                 int tmp = state.isDauble ? 0xA8F : 0x800;
                 mod = joinMod(mod, tmp);
