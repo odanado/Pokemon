@@ -88,7 +88,7 @@ namespace PokemonLibrary
                 }
             }
 
-            if (attacker.isBurn)
+            if (move.category == "Physical" && attacker.isBurn)
             {
                 result = result.Select(n => n / 2).ToList();
             }
