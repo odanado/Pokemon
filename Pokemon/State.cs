@@ -14,6 +14,7 @@ namespace PokemonLibrary
         public bool isSunnyDay { set; get; }
         public bool isRainDance { set; get; }
         public bool isSandStorm { set; get; }
+        public bool isDauble { set; get; }
 
         public State()
         {
@@ -23,6 +24,7 @@ namespace PokemonLibrary
             isSunnyDay = false;
             isRainDance = false;
             isSandStorm = false;
+            isDauble = false;
         }
     }
 }

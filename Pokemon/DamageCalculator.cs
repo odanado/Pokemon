@@ -23,7 +23,7 @@ namespace PokemonLibrary
 
             if (state.isSandStorm && move.category == "Special")
             {
-                defenseStat = (int) (defenseStat * 1.5);
+                defenseStat = (int)(defenseStat * 1.5);
             }
 
             /*
@@ -117,6 +117,9 @@ namespace PokemonLibrary
                 result = result.Select(n => n / 2).ToList();
             }
 
+            var mod = calcMod(attacker, defender, move, state);
+            result = result.Select(n => modify(n, mod, 0x1000)).ToList();
+
             return result;
         }
         private int modify(int value, double numerator, double denominator = 1.0)
@@ -141,5 +144,38 @@ namespace PokemonLibrary
             return stat;
         }
 
+        private int calcMod(Pokemon attcker, Pokemon defender, Move move, State state)
+        {
+            int mod = 0x1000;
+
+            if (state.isReflect && move.category == "Physical")
+            {
+                int tmp = state.isDauble ? 0xA8F : 0x800;
+                mod = joinMod(mod, tmp);
+            }
+
+            if (state.isLightScreen && move.category == "Special")
+            {
+                int tmp = state.isDauble ? 0xA8F : 0x800;
+                mod = joinMod(mod, tmp);
+            }
+
+            /*
+             * TODO 
+             * 特性
+             * 持ち物
+             * 技の効果
+             * 場の効果
+             * を実装する
+             * 
+             */
+
+            return mod;
+        }
+
+        private int joinMod(int mod1, int mod2)
+        {
+            return ((mod1 * mod2 + 0x800) >> 12);
+        }
     }
 }
