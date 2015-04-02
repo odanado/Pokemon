@@ -16,8 +16,12 @@ namespace PokemonLibrary
         }
         public List<int> exec(Pokemon attacker, Pokemon defender, Move move)
         {
-            string attackStat = move.category == "Physical" ? "atk" : "spa";
-            string defenseStat = move.category == "Physical" ? "def" : "spd";
+            string attackStatName = move.category == "Physical" ? "atk" : "spa";
+            string defenseStatName = move.category == "Physical" ? "def" : "spd";
+            int attackStat = modifyStat(attacker, attackStatName);
+            int defenseStat = modifyStat(defender, defenseStatName);
+
+
             /*
              * ダメージ = ( ( ( ( ( ( 攻撃側のレベル * 2 ) / 5 + 2 ) * 威力 * 攻撃力 ) / 防御力 ) / 50 + 2 ) * マルチ対象※ * 天候※ * 急所 * 乱数幅(16分率) * タイプ一致※ * タイプ相性 * 火傷 * ダメージ補正※ )
              * 威力 = ( いりょく(技) * 威力補正 )
@@ -26,7 +30,7 @@ namespace PokemonLibrary
              */
 
             int baseDamage;
-            baseDamage = (((((attacker.level * 2) / 5 + 2) * move.basePower * attacker.stats[attackStat]) / defender.stats[defenseStat]) / 50 + 2);
+            baseDamage = (((((attacker.level * 2) / 5 + 2) * move.basePower * attackStat) / defenseStat) / 50 + 2);
 
             if (move.isSpreadHit)
             {
@@ -88,13 +92,29 @@ namespace PokemonLibrary
             {
                 result = result.Select(n => n / 2).ToList();
             }
-            
+
             return result;
         }
         private int modify(int value, double numerator, double denominator = 1.0)
         {
             int modifier = (int)Math.Floor(numerator * 4096 / denominator);
             return (value * modifier + 2048 - 1) / 4096;
+        }
+
+        private int modifyStat(Pokemon pokemon, string statName)
+        {
+            int stat = pokemon.stats[statName];
+            var boostTable = new List<double>() { 1, 1.5, 2, 2.5, 3, 3.5, 4 };
+            if (pokemon.boosts[statName] >= 0)
+            {
+                stat = (int)(stat * boostTable[pokemon.boosts[statName]]);
+            }
+            else
+            {
+                stat = (int)(stat / boostTable[pokemon.boosts[statName]]);
+            }
+
+            return stat;
         }
 
     }
