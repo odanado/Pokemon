@@ -1,4 +1,4 @@
-# Pokemon
+# PokemonLibrary
 
 Pokemon/pokedex.json と Pokemon/items.json と Pokemon/moves.json と Pokemon/typechart.json は以下のものを使用しています  
 Pokémon Showdown
