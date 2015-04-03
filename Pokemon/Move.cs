@@ -29,7 +29,9 @@ namespace PokemonLibrary
                 throw new KeyNotFoundException(key + " は技に存在しません");
             }
             type = movedex[key].type;
-            accuracy = (int)movedex[key].accuracy;
+            if (movedex[key].accuracy.GetType().Name == "Boolean") { accuracy = 100; }
+            else { accuracy = (int)movedex[key].accuracy; }
+
             basePower = (int)movedex[key].basePower;
             category = movedex[key].category;
             pp = (int)movedex[key].pp;
