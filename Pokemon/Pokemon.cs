@@ -29,6 +29,7 @@ namespace PokemonLibrary
         public Dictionary<string, int> stats { get; set; }
 
         public bool isBurn { get; set; }
+        public bool isParalysis { get; set; }
 
         public Pokemon(string name)
         {
@@ -64,6 +65,7 @@ namespace PokemonLibrary
             stats = new Dictionary<string, int>();
 
             isBurn = false;
+            isParalysis = false;
             calcStats();
         }
 
